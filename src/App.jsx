@@ -46,13 +46,18 @@ const defaultDraft = (ref) => ({
   notes: "",
 });
 
+function groupThousands(numStr) {
+  return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+
 function formatMoney(amount, currency) {
   if (currency === "EUR") {
-    return (
-      amount.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €"
-    );
+    const fixed = amount.toFixed(2);
+    const [intPart, decPart] = fixed.split(".");
+    return groupThousands(intPart) + "," + decPart + " €";
   }
-  return Math.round(amount).toLocaleString("fr-FR") + " FCFA";
+  return groupThousands(String(Math.round(amount))) + " FCFA";
+}
 }
 
 function pad(n, len) {
