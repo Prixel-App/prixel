@@ -58,7 +58,6 @@ function formatMoney(amount, currency) {
   }
   return groupThousands(String(Math.round(amount))) + " FCFA";
 }
-}
 
 function pad(n, len) {
   return String(n).padStart(len, "0");
@@ -586,6 +585,7 @@ export default function App() {
           border-radius: 3px;
           box-shadow: 0 12px 40px rgba(0,0,0,0.45);
           font-family: 'Inter', sans-serif;
+          box-sizing: border-box;
         }
         .kn-bars { display: flex; height: 5px; margin: 14px 0 22px 0; border-radius: 2px; overflow: hidden; }
         .kn-bars div { flex: 1; }
@@ -638,6 +638,8 @@ export default function App() {
         .kn-save-flag { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--accent-2); }
         .kn-error { color: var(--accent); font-size: 12px; margin-top: 8px; }
         @media print {
+          @page { margin: 14mm; }
+          html, body { background: #ffffff !important; }
           body * { visibility: hidden; }
           .kn-paper, .kn-paper * { visibility: visible; }
           .kn-paper { position: absolute; top: 0; left: 0; box-shadow: none; width: 100%; max-width: none; }
