@@ -63,7 +63,7 @@ _Doublons/…
 
 ## Utilisation
 
-### Avec la fenêtre
+### Avec l'interface
 
 Double-cliquez sur `Archiviste.command` (macOS) ou `Archiviste.bat` (Windows),
 ou lancez :
@@ -72,9 +72,21 @@ ou lancez :
 python3 -m archiviste
 ```
 
-1. Choisissez le dossier à ranger et le dossier d'arrivée (le même, ou un autre disque).
-2. **Analyser** : la liste montre, pour chaque fichier, où il ira et d'où vient sa date.
-3. **Ranger** : confirmez. **Annuler le dernier rangement** à tout moment.
+L'interface s'ouvre dans sa propre fenêtre (Chrome ou Edge en mode application,
+sinon dans votre navigateur). Tout se passe sur votre ordinateur : rien n'est
+envoyé sur Internet.
+
+1. **Préparer** : choisissez le disque à ranger et la destination, la méthode
+   (copie ou déplacement), l'écart entre séances et l'organisation des dossiers.
+2. **Vérifier** : chiffres clés (fichiers, volume, séances, doublons, part des dates
+   sûres), répartition par catégorie, arborescence à venir avec les vignettes de
+   chaque séance (aperçus des RAW compris), liste complète filtrable, doublons
+   côte à côte avec leur original.
+3. **Ranger** : confirmez. Le bouton **Historique** permet d'annuler n'importe quel
+   rangement passé.
+
+Fermer la fenêtre arrête Archiviste au bout de quelques minutes. L'ancienne fenêtre
+simple reste disponible avec `python3 -m archiviste --classique`.
 
 ### En ligne de commande
 

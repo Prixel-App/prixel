@@ -41,12 +41,19 @@ def tree_lines(plan, max_folders=40):
     return lines
 
 
-def write_csv(plan, path):
-    with open(path, "w", newline="", encoding="utf-8-sig") as fh:
-        w = csv.writer(fh, delimiter=";")
-        w.writerow(["Action", "Catégorie", "Thème", "Date", "Source de la date", "Appareil",
-                    "Taille", "Fichier d'origine", "Nouvel emplacement", "Doublon de"])
-        for i in plan.items:
-            w.writerow([i.action, i.category, i.topic or "", i.meta.date.strftime("%Y-%m-%d %H:%M"),
-                        i.meta.source, i.meta.camera or "", i.size, i.src, i.dest,
-                        i.duplicate_of or ""])
+def write_csv(plan, target):
+    """Écrit le plan dans un chemin de fichier ou dans un objet fichier déjà ouvert."""
+    if hasattr(target, "write"):
+        return _write_rows(plan, target)
+    with open(target, "w", newline="", encoding="utf-8-sig") as fh:
+        return _write_rows(plan, fh)
+
+
+def _write_rows(plan, fh):
+    w = csv.writer(fh, delimiter=";")
+    w.writerow(["Action", "Catégorie", "Thème", "Date", "Source de la date", "Appareil",
+                "Taille", "Fichier d'origine", "Nouvel emplacement", "Doublon de"])
+    for i in plan.items:
+        w.writerow([i.action, i.category, i.topic or "", i.meta.date.strftime("%Y-%m-%d %H:%M"),
+                    i.meta.source, i.meta.camera or "", i.size, i.src, i.dest,
+                    i.duplicate_of or ""])

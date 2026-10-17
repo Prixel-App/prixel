@@ -1,6 +1,7 @@
 """Ligne de commande.
 
-  python -m archiviste                         ouvre la fenêtre
+  python -m archiviste                         ouvre l'interface
+  python -m archiviste --classique             ouvre l'ancienne fenêtre simple (Tkinter)
   python -m archiviste SOURCE DEST             aperçu (rien n'est modifié)
   python -m archiviste SOURCE DEST --appliquer range pour de vrai
   python -m archiviste annuler DEST            annule le dernier rangement
@@ -45,6 +46,9 @@ def _undo(argv):
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     if not argv:
+        from .server import serve
+        return serve()
+    if argv[0] == "--classique":
         from .gui import run
         return run()
     if argv[0] == "annuler":
